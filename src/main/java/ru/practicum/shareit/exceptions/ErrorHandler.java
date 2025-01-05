@@ -17,24 +17,17 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage()); // Возвращаем новое сообщение об ошибке
     }
 
-    // Метод для обработки исключений ValidationException
-    @ExceptionHandler
+    // Объединенный метод для обработки ValidationException и IllegalArgumentException
+    @ExceptionHandler({ValidationException.class, IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleBadRequest(ValidationException e) {
-        return new ErrorResponse(e.getMessage()); // Возвращаем новое сообщение об ошибке
+    public ErrorResponse handleBadRequestExceptions(RuntimeException e) {
+        return new ErrorResponse(e.getMessage());
     }
 
     // Метод для обработки исключений EmailValidException
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) // Устанавливаем статус ответа 409 Conflict
     public ErrorResponse handleEmailValidException(EmailValidException e) {
-        return new ErrorResponse(e.getMessage()); // Возвращаем новое сообщение об ошибке
-    }
-
-    // Метод для обработки исключений IllegalArgumentException
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST) // Устанавливаем статус ответа 400 Bad Request
-    public ErrorResponse handleEmptyFieldException(IllegalArgumentException e) {
         return new ErrorResponse(e.getMessage()); // Возвращаем новое сообщение об ошибке
     }
 
