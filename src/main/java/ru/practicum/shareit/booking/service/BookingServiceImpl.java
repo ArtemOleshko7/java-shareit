@@ -107,7 +107,7 @@ public class BookingServiceImpl implements BookingService {
                 bookings = bookingRepository.findAllByBookerIdOrderByStartDesc(userId);
             }
             default -> {
-                throw new NotValidException(BookingState.class, "invalid");
+                throw new NotValidException(BookingState.class, "Бронирование не найдено");
             }
         }
         log.info("Все бронирования найдены - {}", bookings);
@@ -143,7 +143,7 @@ public class BookingServiceImpl implements BookingService {
                 bookings = bookingRepository.findAllByItemIdInOrderByStartDesc(itemIds);
             }
             default -> {
-                throw new NotValidException(BookingState.class, "invalid");
+                throw new NotValidException(BookingState.class, "Бронирование не найдено");
             }
         }
         log.info("Все бронирования userId - {}, найдены - {}", userId, bookings);

@@ -16,23 +16,23 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    UserDto createUser(@RequestBody @Validated(ValidateCreateRequest.class) UserSaveDto userSaveDto) {
+    public UserDto createUser(@RequestBody @Validated(ValidateCreateRequest.class) UserSaveDto userSaveDto) {
         return userService.createUser(userSaveDto);
     }
 
     @GetMapping("/{userId}")
-    UserDto getUser(@PathVariable Integer userId) {
+    public UserDto getUser(@PathVariable Integer userId) {
         return userService.getUser(userId);
     }
 
     @PatchMapping("/{userId}")
-    UserDto updateUser(@PathVariable Integer userId,
-                       @RequestBody @Validated(ValidateUpdateRequest.class) UserSaveDto userSaveDto) {
+    public UserDto updateUser(@PathVariable Integer userId,
+                              @RequestBody @Validated(ValidateUpdateRequest.class) UserSaveDto userSaveDto) {
         return userService.updateUser(userId, userSaveDto);
     }
 
     @DeleteMapping("/{userId}")
-    void deleteUser(@PathVariable Integer userId) {
+    public void deleteUser(@PathVariable Integer userId) {
         userService.deleteUser(userId);
     }
 }

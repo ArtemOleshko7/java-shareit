@@ -24,8 +24,13 @@ public class ItemRequest {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "requestor_id")
+    @JoinColumn(name = "requestor_id", nullable = false) // Указание имени колонки и обязательности
     private User requester;
 
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created; // Добавлено поле для времени создания
+
+    @PrePersist
+    protected void onCreate() {
+        created = LocalDateTime.now(); // Установка времени создания перед сохранением
+    }
 }

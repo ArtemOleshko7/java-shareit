@@ -18,32 +18,32 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping
-    BookingDto addBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
-                          @RequestBody @Valid BookingSaveDto bookingSaveDto) {
+    public BookingDto addBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
+                                 @RequestBody @Valid BookingSaveDto bookingSaveDto) {
         return bookingService.addBooking(userId, bookingSaveDto);
     }
 
     @PatchMapping("/{bookingId}")
-    BookingDto manageBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
-                             @PathVariable int bookingId, @RequestParam boolean approved) {
+    public BookingDto manageBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
+                                    @PathVariable int bookingId, @RequestParam boolean approved) {
         return bookingService.manageBooking(userId, bookingId, approved);
     }
 
     @GetMapping("/{bookingId}")
-    BookingDto getBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
-                          @PathVariable int bookingId) {
+    public BookingDto getBooking(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
+                                 @PathVariable int bookingId) {
         return bookingService.getBooking(userId, bookingId);
     }
 
     @GetMapping
-    Collection<BookingDto> getAllUserBookings(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
-                                              @RequestParam(defaultValue = "ALL") BookingState state) {
+    public Collection<BookingDto> getAllUserBookings(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
+                                                     @RequestParam(defaultValue = "ALL") BookingState state) {
         return bookingService.getAllUserBookings(userId, state);
     }
 
     @GetMapping("/owner")
-    Collection<BookingDto> getAllUserItemsBookings(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
-                                                   @RequestParam(defaultValue = "ALL") BookingState state) {
+    public Collection<BookingDto> getAllUserItemsBookings(@RequestHeader(value = RequestHttpHeaders.USER_ID) int userId,
+                                                          @RequestParam(defaultValue = "ALL") BookingState state) {
         return bookingService.getAllUserItemsBookings(userId, state);
     }
 }
